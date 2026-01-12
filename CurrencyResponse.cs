@@ -4,10 +4,10 @@ namespace DovizTakipUygulamasi
 {
     public class CurrencyResponse
     {
-        // DÜZELTME: Başlangıç değeri atandı.
+        // Başlangıç değeri atadım.
         public string Base { get; set; } = string.Empty;
 
-        // DÜZELTME: Başlangıçta boş bir liste (Dictionary) oluşturduk.
+        // Başlangıçta boş bir liste (Dictionary) oluşturdum.
         // Böylece "Rates null geldi" hatası almayız.
         public Dictionary<string, decimal> Rates { get; set; } = new Dictionary<string, decimal>();
     }

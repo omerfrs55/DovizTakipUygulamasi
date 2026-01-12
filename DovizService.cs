@@ -9,14 +9,14 @@ namespace DovizTakipUygulamasi
 {
     public class DovizService
     {
-        // DÜZELTME: Listeyi tanımlarken hemen "new" diyerek oluşturuyoruz.
+        // Listeyi tanımlarken hemen "new" diyerek oluşturuyoruz.
         // Constructor içinde yapmasak bile burası garantiye alır.
         private List<Currency> _dovizListesi = new List<Currency>();
 
         public DovizService()
         {
-            // Burası boş kalabilir veya _dovizListesi = new List<Currency>(); kalabilir.
-            // Yukarıda eşitlediğimiz için sorun çözüldü.
+            // Burası boş  veya _dovizListesi = new List<Currency>(); da olabilir.
+            // Yukarıda eşitlediğim için sorun çözüldü.
         }
 
         public async Task VerileriYukleAsync()
@@ -29,7 +29,7 @@ namespace DovizTakipUygulamasi
                 {
                     string jsonVerisi = await client.GetStringAsync(url);
 
-                    // DÜZELTME: Deserialize işleminde null gelme ihtimaline karşı "?" koyabiliriz
+                    // Deserialize işleminde null gelme ihtimaline karşı "?" koyabiliriz
                     // Ama aşağıdaki if kontrolü zaten bunu yapıyor.
                     var response = JsonConvert.DeserializeObject<CurrencyResponse>(jsonVerisi);
 
@@ -56,7 +56,7 @@ namespace DovizTakipUygulamasi
 
         public List<Currency> Ara(string kod)
         {
-            // DÜZELTME: "kod" parametresi null gelirse hata vermesin diye kontrol ekledik.
+            // "kod" parametresi null gelirse hata vermesin diye kontrol ekledim.
             if (string.IsNullOrEmpty(kod)) return new List<Currency>();
 
             return _dovizListesi
@@ -97,7 +97,7 @@ namespace DovizTakipUygulamasi
             // Eğer enYuksek null ise (veri yoksa) hata vermesin diye kontrol (?)
             // Ama yukarıda Count == 0 kontrolü olduğu için buraya veri varsa gelir.
 
-            // Garanti olsun diye null kontrolü yapalım (CS8602 uyarısını önlemek için):
+            // Garanti olsun diye null kontrolü yaptım (CS8602 uyarısını önlemek için):
             if (enYuksek == null || enDusuk == null) return "Hesaplanamadı.";
 
             return $"Toplam Döviz Sayısı: {toplamSayi}\n" +

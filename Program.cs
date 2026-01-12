@@ -13,7 +13,7 @@ namespace DovizTakipUygulamasi
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Currency Tracker v1.0";
 
-            // Servis sınıfını başlatıyoruz.
+            // Servis sınıfımızı başlatıyoruz.
             DovizService service = new DovizService();
 
             RenkliYaz("Veriler API'den çekiliyor, lütfen bekleyiniz...", ConsoleColor.Yellow);
@@ -31,7 +31,7 @@ namespace DovizTakipUygulamasi
                 return; // Hata varsa programı durdur.
             }
 
-            // Kullanıcı mesajı görsün diye 1 saniye bekletiyoruz.
+            // Kullanıcı mesajı görsün diye 1 saniye bekletiyorum.
             System.Threading.Thread.Sleep(1000);
 
             // SONSUZ DÖNGÜ (Menü sürekli döner)
@@ -39,7 +39,7 @@ namespace DovizTakipUygulamasi
             {
                 Console.Clear();
 
-                // --- MENÜ TASARIMI (MOR TEMA) ---
+                // --- MENÜ TASARIMIM ---
                 RenkliYaz("===============================", ConsoleColor.Magenta);
                 RenkliYaz("      CURRENCY TRACKER         ", ConsoleColor.Magenta);
                 RenkliYaz("===============================", ConsoleColor.Magenta);
@@ -61,7 +61,7 @@ namespace DovizTakipUygulamasi
                 switch (secim)
                 {
                     case "1":
-                        // Tüm listeyi getir ve tabloya bas.
+                        // Tüm listeyi getir ve tabloya bas
                         var tumListe = service.TumunuGetir();
                         TabloYazdir("TÜM DÖVİZLER", tumListe);
                         break;
@@ -95,7 +95,7 @@ namespace DovizTakipUygulamasi
                             continue;
                         }
 
-                        // Nokta/Virgül dönüşümü yaparak sayıya çeviriyoruz.
+                        // Nokta/Virgül dönüşümü yaparak sayıya çeviriyorum
                         if (decimal.TryParse(girilenDeger.Replace('.', ','), out decimal sinir))
                         {
                             var filtreSonucu = service.DegerdenBuyukleriGetir(sinir);
@@ -145,7 +145,7 @@ namespace DovizTakipUygulamasi
                         break;
                 }
 
-                // Seçim 0 değilse, kullanıcının ekranı görebilmesi için bekle.
+                // Seçim 0 değilse, kullanıcının ekranı görebilmesi için bekle
                 if (secim != "0")
                 {
                     Console.WriteLine("\nAna menü için bir tuşa basınız...");
@@ -156,7 +156,7 @@ namespace DovizTakipUygulamasi
 
         // --- YARDIMCI METOTLAR ---
 
-        // Listeyi şık bir tablo halinde yazdıran metot.
+        // Listeyi şık bir tablo halinde yazdıran metot
         static void TabloYazdir(string baslik, List<Currency> liste)
         {
             Console.WriteLine();
@@ -169,7 +169,7 @@ namespace DovizTakipUygulamasi
             }
 
             // Tablo Başlıkları
-            // {0,-10} -> Sola yasla, 10 karakter yer ayır.
+            // {0,-10} -> Sola yasla, 10 karakter yer ayır
             Console.WriteLine("{0,-10} {1,-15}", "DÖVİZ", "KUR DEĞERİ");
             Console.WriteLine(new string('-', 30));
 
@@ -178,23 +178,23 @@ namespace DovizTakipUygulamasi
                 // Para birimi koduna göre özel simgeyi getir (Örn: USD -> $)
                 string sembol = SembolGetir(item.Code);
 
-                // Ekrana yazdırma: "USD       34.5000 $"
+                // Ekrana yazdırma: "USD34.5000 $"
                 Console.WriteLine("{0,-10} {1,-15}", item.Code, $"{item.Rate:F4} {sembol}");
             }
             Console.WriteLine(new string('-', 30));
             RenkliYaz($"Toplam {liste.Count} kayıt listelendi.", ConsoleColor.DarkGray);
         }
 
-        // Konsola renkli yazı yazmayı sağlayan yardımcı metot.
+        // Konsola renkli yazı yazmayı sağlayan yardımcı metot
         static void RenkliYaz(string mesaj, ConsoleColor renk)
         {
             Console.ForegroundColor = renk;
             Console.WriteLine(mesaj);
-            Console.ResetColor(); // Rengi sıfırla ki sonraki yazılar bozulmasın.
+            Console.ResetColor(); // Rengi sıfırla ki sonraki yazılar bozulmasın
         }
 
-        // Para birimi koduna göre simge döndüren kapsamlı metot.
-        // Frankfurter API'sinde bulunan yaygın tüm para birimleri eklenmiştir.
+        // Para birimi koduna göre simge döndüren kapsamlı metot
+        // Frankfurter API'sinde bulunan yaygın tüm para birimleri ekledim
         static string SembolGetir(string kod)
         {
             switch (kod.ToUpper())
